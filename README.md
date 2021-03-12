@@ -1,2 +1,2 @@
 # Cálculo de IMC
-####  Aplicativo para aplica‡Æo dos conhecimentos adquiridos no bootcamps de kotlin
+####  Aplicativo para aplicação dos conhecimentos adquiridos no bootcamps de kotlin
