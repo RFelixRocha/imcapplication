@@ -11,9 +11,7 @@
         android:theme="@style/Theme.Imcapplication">
         <activity
             android:name=".ResultActivity"
-            android:exported="true"
-            android:label="@string/title_activity_result"
-            android:theme="@style/Theme.Imcapplication.NoActionBar"></activity>
+            android:exported="true"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
