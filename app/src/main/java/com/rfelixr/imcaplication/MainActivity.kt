@@ -2,42 +2,39 @@ package com.rfelixr.imcaplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.w("CicloDeVida","Entrei no CREATE - Criando a tela.")
+        setListeners()
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.w("CicloDeVida","Entrei no START - Tela visível.")
+    private fun setListeners(){
+        input_altura.doAfterTextChanged { text ->
+//            Toast.makeText(this,text.toString(),Toast.LENGTH_SHORT).show()
+        }
+        input_peso.doOnTextChanged { text, start, before, count ->
+//            text_view_imc.text = text
+        }
+
+        btn_calcular.setOnClickListener{
+            calcularImc(input_peso.text.toString(),input_altura.text.toString())
+        }
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.w("CicloDeVida","Entrei no RESUME - Pode interagir com a tela visível.")
-    }
+    private fun calcularImc(peso: String, altura: String){
+        val peso = peso.toFloatOrNull()
+        val altura =  altura.toFloatOrNull()
 
-    override fun onPause() {
-        super.onPause()
-        Log.w("CicloDeVida","Entrei no PAUSE - Tela perdeu o foco. Não pode mais interagir.")
-    }
+        if (peso != null && altura != null){
+            val imc = peso / (altura * altura)
 
-    override fun onStop() {
-        super.onStop()
-        Log.w("CicloDeVida","Entrei no STOP - Tela não visível, mas ainda existe.")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.w("CicloDeVida","Entrei no RESTART - Tela está retomando o foco.")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.w("CicloDeVida","Entrei no DESTROY - Tela destruída.")
+            text_view_imc.text  = "Seu IMC é: %.2f".format(imc)
+        }
     }
 }
